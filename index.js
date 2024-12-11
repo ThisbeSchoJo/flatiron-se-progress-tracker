@@ -13,11 +13,20 @@ const taskList = document.getElementById("task-list");
 const progressBar = document.getElementById("progress-bar");
 const progressText = document.getElementById("progress-text");
 
+//Render tasks dynamically in the list
+const renderTasks = () => {
+    taskList.innerHTML = ""; //Clear the list before re-rendering
+    tasks.forEach((task, index) => {
+        const listItem = document.createElement("li");
+
+        const checkbox = document.createElement("input");
+        checkbox.type
+    })
+}
 //Add an event listener to each checkbox
 //when checkbox is toggled, 
 //update completed property for corresponding task
-//and recalculate the progress
-
+//Recalculate the progress
 const calculateProgress = () => {
     const completedTasks = tasks.filter(task => task.completed).length;
     return (completedTasks / tasks.length) * 100
