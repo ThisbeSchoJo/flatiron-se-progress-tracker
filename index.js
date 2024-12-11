@@ -9,28 +9,24 @@ const tasks = [
 ];
 
 //Select DOM elements
-const taskList = document.getElementById("task-list");
+const checkboxes = document.querySelectorAll("input[type='checkbox']");
 const progressBar = document.getElementById("progress-bar");
 const progressText = document.getElementById("progress-text");
 
-//Render tasks dynamically in the list
-const renderTasks = () => {
-    taskList.innerHTML = ""; //Clear the list before re-rendering
-    tasks.forEach((task, index) => {
-        const listItem = document.createElement("li");
+//Fundtion to update progress
+const updateProgress = () => {
+    const completedTasks = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
+    const totalTasks = checkboxes.length;
+    const progress = (completedTasks / totalTasks) *100;
 
-        const checkbox = document.createElement("input");
-        checkbox.type
-    })
-}
-//Add an event listener to each checkbox
-//when checkbox is toggled, 
-//update completed property for corresponding task
+    progressBar.style.width = `${progress}%` ;
+    progressText.textContent = `Progress: ${Math.round(progress)}`;
+};
+
+//Add an event listener to checkboxes
+checkboxes.forEach(checkbox => {
+    checkbox.addEventListener("change", updateProgress);
+});
+
 //Recalculate the progress
-const calculateProgress = () => {
-    const completedTasks = tasks.filter(task => task.completed).length;
-    return (completedTasks / tasks.length) * 100
-}
-
-//Save user's progress with local storage
-localStorage.setItem("tasks", JSON.stringify(tasks));
+updateProgress();
